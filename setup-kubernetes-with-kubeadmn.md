@@ -12,6 +12,10 @@
       sudo yum install docker -y
       sudo service docker start
       sudo chkconfig docker on
+      sudo yum install -y yum-utils
+      sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+      sudo yum install -y containerd.io
+      sudo systemctl restart containerd
   ```
   
   * ### Adding current user to docker group (Optional)
