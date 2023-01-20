@@ -20,6 +20,7 @@
   
   * ### Adding current user to docker group (Optional)
       ```
+        sudo groupadd docker
         sudo usermod -aG docker $USER
         sudo service docker start 
       ```
