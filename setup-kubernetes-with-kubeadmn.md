@@ -61,7 +61,10 @@ sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 sudo systemctl enable --now kubelet
 ```     
 ## 3. Initialize kubernets cluster on Master node(Run this only on master)
-    sudo kubeadm init
+   Before running this ensure containerd service running or not 
+   sudo rm /etc/containerd/config.toml
+   sudo systemctl restart containerd
+   sudo kubeadm init
         
 ## 4. Do following setup to start using kubernetes cluster(Run this only on master)
   ```
@@ -77,14 +80,18 @@ sudo systemctl enable --now kubelet
   
   ```
     Run this command(replace with your command) on every node to join the cluster
-  
+    sudo rm /etc/containerd/config.toml
+    sudo systemctl restart containerd
+    
     sudo kubeadm join 172.31.44.226:6443 --token f6o4a3.jdagdd4e2h8xhzy1 \
       --discovery-token-ca-cert-hash sha256:d0528baca6a2cf15bfece995d7df6f5d018b233b54251716ce2fd984148ba6d6
+      Make sure you run the kubeadm join command with verbosity level of 5 and above
+(by appending the --v=5 flag)
  ```
  
   ## 7. Get list of nodes in the cluster (Run this on master)
   
   ```
-  kubectly get nodes
+  kubectl get nodes
  ```
  
